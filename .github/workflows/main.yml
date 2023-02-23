@@ -11,13 +11,12 @@ jobs:
       - name: Code Checkout
         uses: actions/checkout@v3       # Checkout the code
       - name: NextJS Build 
+      - run: npm ci            #install dependencies
+      - run: npm run build
         env: 
           NEXT_PUBLIC_GREETINGS: ${{secrets.NEXT_PUBLIC_GREETINGS}}
           NEXT_PUBLIC_ROLE: ${{secrets.NEXT_PUBLIC_ROLE}}
           NEXT_PUBLIC_COMPANY: ${{secrets.NEXT_PUBLIC_COMPANY}}
-        run: |
-          npm ci
-          npm run build
       
       - name: Upload Next build          # Upload the artifact
         uses: actions/upload-artifact@v2
