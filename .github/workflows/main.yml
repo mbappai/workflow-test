@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
-        uses: actions/checkout@v3       # Checkout the code
+        uses: actions/checkout@v2       # Checkout the code
 
       - run: npm ci            #install dependencies
       - run: npm run build
