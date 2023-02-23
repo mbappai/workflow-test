@@ -18,7 +18,6 @@ jobs:
       - run: npm run build
         env: 
           MAIN_ENV_FILE: ${{secrets.MAIN_ENV_FILE}}
-  
       - name: Upload Next build          # Upload the artifact
         uses: actions/upload-artifact@v2
         with:
@@ -46,10 +45,6 @@ jobs:
           password: ${{ secrets.GHCR_TOKEN }}
       - name: Build and Push Docker Image
         run: |
-
-          export TAG=latest
-          export GITHUB_REF_IMAGE=ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
-          export GITHUB_BRANCH_IMAGE=ghcr.io/$GITHUB_REPOSITORY:$TAG
-          docker build -t $GCR_IMAGE -t $GITHUB_BRANCH_IMAGE .
+          docker build -t ghcr.io/mbappai/workflow-test:latest .
           echo "Pushing Image to GitHub Container Registry"
-          docker push $GITHUB_BRANCH_IMAGE
+          docker push ghcr.io/mbappai/workflow-test:latest
